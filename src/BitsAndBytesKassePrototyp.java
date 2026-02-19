@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class BitsAndBytesKassePrototyp {
@@ -8,15 +9,23 @@ public class BitsAndBytesKassePrototyp {
         double summe = 0;
 
         System.out.print("Preis eingeben (0 beendet): ");
-
-        double preis = sc.nextDouble(); // Problem: wird nur einmal gelesen
-
+        
+        try {
+        double preis = sc.hasNextDouble();
+        
         while (preis != 0) {
             preiseListe.add(preis);
             summe += preis;
             System.out.print("Preis eingeben (0 beendet): ");
             preis = sc.nextDouble();
-        }
+        } 
+    } 
+    catch (InputMismatchException e) {
+       System.out.println("Ungültige Eingabe. Bitte geben Sie eine Zahl ein.");
+       sc.next();
+       continue;
+        } 
+        
 
         // SOLL: Export in ein Array (z.B. Schnittstelle)
         double[] preiseArray = new double[preiseListe.size()];
