@@ -8,11 +8,14 @@ public class BitsAndBytesKassePrototyp {
         double summe = 0;
 
         System.out.print("Preis eingeben (0 beendet): ");
+
         double preis = sc.nextDouble(); // Problem: wird nur einmal gelesen
 
-        if (preis != 0) {
+        while (preis != 0) {
             preiseListe.add(preis);
             summe += preis;
+            System.out.print("Preis eingeben (0 beendet): ");
+            preis = sc.nextDouble();
         }
 
         // SOLL: Export in ein Array (z.B. Schnittstelle)
@@ -23,6 +26,7 @@ public class BitsAndBytesKassePrototyp {
 
         System.out.println("Artikel: " + preiseListe.size());
         System.out.println("Summe: " + summe);
+        System.out.println("Durchschnitt: " + (summe / preiseListe.size()));
         sc.close();
     }
 }
