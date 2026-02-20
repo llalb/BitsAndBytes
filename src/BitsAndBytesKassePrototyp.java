@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class BitsAndBytesKassePrototyp {
@@ -8,23 +7,23 @@ public class BitsAndBytesKassePrototyp {
         ArrayList<Double> preiseListe = new ArrayList<>();
         double summe = 0;
 
-        System.out.print("Preis eingeben (0 beendet): ");
+        System.out.println("Preis eingeben (0 beendet):");
         
-        try {
-        double preis = sc.hasNextDouble();
-        
-        while (preis != 0) {
-            preiseListe.add(preis);
-            summe += preis;
-            System.out.print("Preis eingeben (0 beendet): ");
-            preis = sc.nextDouble();
-        } 
-    } 
-    catch (InputMismatchException e) {
-       System.out.println("Ungültige Eingabe. Bitte geben Sie eine Zahl ein.");
-       sc.next();
-       continue;
-        } 
+            double preis = sc.nextDouble();
+            
+            while (preis != 0) {
+                if (!sc.hasNextDouble()) {
+                    System.out.println("Ungültige Eingabe.\nBitte geben Sie eine Zahl ein!");
+                    sc.next();
+                    System.out.println("Preis eingeben (0 beendet):");
+                    continue;
+                }
+                preiseListe.add(preis);
+                summe += preis;
+                preis = sc.nextDouble();
+        }
+     
+
         
 
         // SOLL: Export in ein Array (z.B. Schnittstelle)
