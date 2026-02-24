@@ -8,23 +8,37 @@ public class BitsAndBytesKassePrototyp {
         double summe = 0;
 
         System.out.println("Preis eingeben (0 beendet):");
-        
-            double preis = sc.nextDouble();
-            
-            while (preis != 0) {
-                if (!sc.hasNextDouble()) {
-                    System.out.println("Ungültige Eingabe.\nBitte geben Sie eine Zahl ein!");
-                    sc.next();
-                    System.out.println("Preis eingeben (0 beendet):");
-                    continue;
-                }
-                preiseListe.add(preis);
-                summe += preis;
-                preis = sc.nextDouble();
-        }
-     
 
-        
+        double preis = sc.nextDouble();
+
+        while (true) {
+
+            if (preis == 0) {
+                break;
+            }
+
+            if (!sc.hasNextDouble()) {
+                sc.next();
+                System.out.println("Ungültige Eingabe!\n" +
+                        "Bitte geben Sie nur positive Zahlen ein!");
+                System.out.println("Preis eingeben (0 beendet):");
+                continue;
+            }
+
+            preis = sc.nextDouble();
+            if (preis == 0) {
+                break;
+            }
+
+            if (preis < 0) {
+                System.out.println("Bitte geben Sie nur positive Zahlen ein!");
+                continue;
+            }
+
+            preiseListe.add(preis);
+            summe += preis;
+            System.out.println("Aktueller Gesamtpreis: " + (preis + summe));
+        }
 
         // SOLL: Export in ein Array (z.B. Schnittstelle)
         double[] preiseArray = new double[preiseListe.size()];
@@ -32,9 +46,23 @@ public class BitsAndBytesKassePrototyp {
             preiseArray[i] = preiseListe.get(i);
         }
 
+        // round.Math zum runden auf zwei Nachkommastellen
         System.out.println("Artikel: " + preiseListe.size());
+        summe = Math.round(summe * 100.0) / 100.0;
         System.out.println("Summe: " + summe);
         System.out.println("Durchschnitt: " + (summe / preiseListe.size()));
+
+        sc.nextLine();
+
+        System.out.println("Schreiben Sie [y] um die Quittung auszugeben.\n" +
+                "Andernfalls drücken Sie eine andere Taste um den Vorgang abzuschließen.");
+        String Quittung = sc.nextLine();
+
+        if (Quittung.equals("y")) {
+            System.out.println("Ihr Einkauf:\n" + preiseListe);
+        } else {
+            System.out.println("Vielen Dank für Ihren Einkauf!");
+        }
         sc.close();
     }
 }
