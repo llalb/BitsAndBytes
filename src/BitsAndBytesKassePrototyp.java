@@ -4,18 +4,12 @@ import java.util.Scanner;
 public class BitsAndBytesKassePrototyp {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArrayList<Double> preiseListe = new ArrayList<>();
+        ArrayList<Double> preiseListe = new ArrayList<Double>();
         double summe = 0;
 
         System.out.println("Preis eingeben (0 beendet):");
 
-        double preis = sc.nextDouble();
-
         while (true) {
-
-            if (preis == 0) {
-                break;
-            }
 
             if (!sc.hasNextDouble()) {
                 sc.next();
@@ -25,7 +19,7 @@ public class BitsAndBytesKassePrototyp {
                 continue;
             }
 
-            preis = sc.nextDouble();
+            double preis = sc.nextDouble();
             if (preis == 0) {
                 break;
             }
@@ -37,7 +31,7 @@ public class BitsAndBytesKassePrototyp {
 
             preiseListe.add(preis);
             summe += preis;
-            System.out.println("Aktueller Gesamtpreis: " + (preis + summe));
+            System.out.println("Aktueller Gesamtpreis: " + summe);
         }
 
         // SOLL: Export in ein Array (z.B. Schnittstelle)
@@ -46,9 +40,7 @@ public class BitsAndBytesKassePrototyp {
             preiseArray[i] = preiseListe.get(i);
         }
 
-        // round.Math zum runden auf zwei Nachkommastellen
         System.out.println("Artikel: " + preiseListe.size());
-        summe = Math.round(summe * 100.0) / 100.0;
         System.out.println("Summe: " + summe);
         System.out.println("Durchschnitt: " + (summe / preiseListe.size()));
 
